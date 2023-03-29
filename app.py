@@ -16,7 +16,7 @@ with open(INPUT, 'r', encoding='utf-8') as file:
     # список сотрудников
     employees = line_list[2:]
 
-# перетусуем список
+# перетасуем список
 random.shuffle(employees)
 
 
