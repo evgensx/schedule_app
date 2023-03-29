@@ -14,7 +14,7 @@ with open(INPUT, 'r', encoding='utf-8') as file:
     START_DATE = line_list[0]
     END_DATE = line_list[1]
     # список сотрудников
-    employees = line_list[1:]
+    employees = line_list[2:]
 
 # перетусуем список
 random.shuffle(employees)
