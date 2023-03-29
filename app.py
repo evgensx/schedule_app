@@ -3,14 +3,21 @@ import random
 import numpy as np
 
 
-# ДД.ММ.ГГГГ
-START_DATE = '01.04.2023'
-END_DATE = '30.04.2023'
-
 # HOLIDAYS = '13, 15'
 
 INPUT = 'input.txt'
 OUTPUT = 'output.txt'
+
+# отрываем файл для чтения
+with open(INPUT, 'r', encoding='utf-8') as file:
+    line_list = file.read().strip().split('\n')
+    START_DATE = line_list[0]
+    END_DATE = line_list[1]
+    # список сотрудников
+    employees = line_list[1:]
+
+# перетусуем список
+random.shuffle(employees)
 
 
 def str_to_date(date: str):
@@ -25,14 +32,6 @@ def get_holidays(days: str):
 start_date = str_to_date(START_DATE)
 end_date = str_to_date(END_DATE)
 delta = datetime.timedelta(days=1)
-
-
-# отрываем файл для чтения
-with open(INPUT, 'r', encoding='utf-8') as file:
-    employees = file.read().strip().split('\n')
-
-# перетусуем список
-random.shuffle(employees)
 
 # список праздничных дней
 # holidays_list = get_holidays(HOLIDAYS)
