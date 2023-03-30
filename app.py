@@ -3,14 +3,19 @@ import random
 import numpy as np
 
 
-# HOLIDAYS = '13, 15'
-
 INPUT = 'input.txt'
 OUTPUT = 'output.txt'
+HOLIDAYS = 'holidays.txt'
+
+with open(HOLIDAYS, 'r', encoding='utf-8') as file:
+    holidays_list = file.read().strip().split('\n')
+    holidays = [datetime.datetime.strptime(x, "%d.%m.%Y") for x in holidays_list]
+
 
 # отрываем файл для чтения
 with open(INPUT, 'r', encoding='utf-8') as file:
     line_list = file.read().strip().split('\n')
+    #дата начала и конца рассчета
     START_DATE = line_list[0]
     END_DATE = line_list[1]
     # список сотрудников
@@ -19,22 +24,14 @@ with open(INPUT, 'r', encoding='utf-8') as file:
 # перетасуем список
 random.shuffle(employees)
 
-def get_holidays(days: str):
-    # start_date: datetime.date, end_date: datetime.date
-    days_list = days.split(',')
-    return print(days_list)
-
 start_date = datetime.datetime.strptime(START_DATE, "%d.%m.%Y")
 end_date = datetime.datetime.strptime(END_DATE, "%d.%m.%Y")
 delta = datetime.timedelta(days=1)
 
-# список праздничных дней
-# holidays_list = get_holidays(HOLIDAYS)
-
 # генерим список рабочих дней
 date_list = []
 while(start_date <= end_date):
-    if start_date.weekday() != 5 and start_date.weekday() != 6 :  # and not in HOLIDAYS
+    if start_date.weekday() != 5 and start_date.weekday() != 6 and start_date not in holidays:
         date_list.append(start_date.strftime('%d.%m.%Y'))
     start_date += delta
 
