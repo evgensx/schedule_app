@@ -19,18 +19,13 @@ with open(INPUT, 'r', encoding='utf-8') as file:
 # перетасуем список
 random.shuffle(employees)
 
-
-def str_to_date(date: str):
-    d, m, y = map(int, date.split("."))
-    return datetime.date(y, m, d)
-
 def get_holidays(days: str):
     # start_date: datetime.date, end_date: datetime.date
     days_list = days.split(',')
     return print(days_list)
 
-start_date = str_to_date(START_DATE)
-end_date = str_to_date(END_DATE)
+start_date = datetime.datetime.strptime(START_DATE, "%d.%m.%Y")
+end_date = datetime.datetime.strptime(END_DATE, "%d.%m.%Y")
 delta = datetime.timedelta(days=1)
 
 # список праздничных дней
